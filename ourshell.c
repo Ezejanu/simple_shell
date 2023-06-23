@@ -10,7 +10,7 @@ int main(void)
 	char *prompt = "our shell $: ";
 	char *command = NULL;
 	char *commtoken = NULL, *argtoken = NULL, *delim = "\n", *delim2 = " ";
-	char *argv[1024], *tmp = NULL, *Error = "Error";
+	char *argv[1024], *tmp = NULL, *tmpcmp = NULL, *Error = "Error";
 	size_t n = 0;
 	int status, i = 1;
 	pid_t childproc;
@@ -22,6 +22,12 @@ int main(void)
 			return (-1);
 		
 		commtoken = strtok(command, delim);
+		tmpcmp = strdup(commtoken);
+		if (endprog(tmpcmp))
+		{
+			return (1);
+		}
+
 		argtoken = strtok(commtoken, delim2);
 		
 		tmp = strdup(argtoken);
@@ -51,9 +57,9 @@ int main(void)
 			if (execve(argv[0], argv, NULL) == -1)
 				perror("Error");
 		}
-		else
-			wait(&status);
-		}
+			else
+				wait(&status);
+			}
 		else
 		{
 			perror("Error:");

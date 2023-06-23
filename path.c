@@ -42,5 +42,5 @@ char * findpath(char * command)
         while((token = strtok(NULL, delim)));
 
 	free(duplicate);
-        return (command);
+        return ("Error");
 }

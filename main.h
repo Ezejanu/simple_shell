@@ -11,5 +11,6 @@
 #include <unistd.h>
 
 char * findpath(char * command);
+int endprog(char *command);
 
 #endif
