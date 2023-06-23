@@ -9,10 +9,10 @@ int main(void)
 {
 	char *prompt = "our shell $: ";
 	char *command = NULL;
-	char *commtoken, *argtoken, *delim = "\n";
-	char *argv[1024];
+	char *commtoken = NULL, *argtoken = NULL, *delim = "\n", *delim2 = " ";
+	char *argv[1024], *tmp = NULL;
 	size_t n = 0;
-	int status, i;
+	int status, i = 1;
 	pid_t childproc;
 	
 	printf("%s", prompt);
@@ -20,32 +20,40 @@ int main(void)
 	{
 		if (getline(&command, &n, stdin) == -1)
 			return (-1);
+		
 		commtoken = strtok(command, delim);
-
-		argtoken = strtok(commtoken, " ");
-		for (i = 0; argtoken; i++)
+		argtoken = strtok(commtoken, delim2);
+		
+		tmp = strdup(argtoken);
+		
+		argtoken = strtok(NULL, delim2);
+		if(argtoken!= NULL)
 		{
-			argv[i] = argtoken;
-			argtoken = strtok(NULL, " ");
+			do
+			{
+				argv[i++] = argtoken;
+			}
+			while ((argtoken = strtok(NULL, " ")));
 		}
 		argv[i] = NULL;
+		argv[0] = findpath(tmp);
 
 		childproc = fork();
 		if (childproc == -1)
 		{
-			perror("Error:");
+			perror("Error");
 			return (1);
 		}
 		if (childproc == 0)
 		{
 			if (execve(argv[0], argv, NULL) == -1)
-				perror("Error:");
+				perror("Error");
 		}
 		else
 			wait(&status);
 	 printf("%s", prompt); 
 	}
-	free (command);
+	free(command);
 	return (0);
 }
 	

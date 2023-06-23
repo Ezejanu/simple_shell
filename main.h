@@ -10,5 +10,6 @@
 #include <string.h>
 #include <unistd.h>
 
+char * findpath(char * command);
 
 #endif
