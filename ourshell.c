@@ -10,7 +10,7 @@ int main(void)
 	char *prompt = "our shell $: ";
 	char *command = NULL;
 	char *commtoken = NULL, *argtoken = NULL, *delim = "\n", *delim2 = " ";
-	char *argv[1024], *tmp = NULL;
+	char *argv[1024], *tmp = NULL, *Error = "Error";
 	size_t n = 0;
 	int status, i = 1;
 	pid_t childproc;
@@ -36,13 +36,15 @@ int main(void)
 			while ((argtoken = strtok(NULL, " ")));
 		}
 		argv[i] = NULL;
-		argv[0] = findpath(tmp);
-
-		childproc = fork();
-		if (childproc == -1)
+		if(findpath(tmp) != Error)
 		{
-			perror("Error");
-			return (1);
+			argv[0] = findpath(tmp);
+
+			childproc = fork();
+			if (childproc == -1)
+			{
+				perror("Error");
+				return (1);
 		}
 		if (childproc == 0)
 		{
@@ -51,7 +53,13 @@ int main(void)
 		}
 		else
 			wait(&status);
-	 printf("%s", prompt); 
+		}
+		else
+		{
+			perror("Error:");
+		}
+		printf("%s", prompt); 
+		
 	}
 	free(command);
 	return (0);
