@@ -18,7 +18,12 @@ int main(void)
 	{
 		if (getline(&command, &n, stdin) == -1)
 			return (-1);
-
+		/**
+		if (command == NULL)
+		{
+			_write(prompt);
+			continue;
+		}*/
 		commtoken = strtok(command, "\n");
 		tmpcmp = _strdup(commtoken);
 		if (endprog(tmpcmp))

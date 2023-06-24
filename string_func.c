@@ -43,6 +43,21 @@ char *_strcat(char *dest, char *src)
 }
 
 /**
+ * _strlen - Function to return the length of a string
+ * @s: pointer to the string
+ * Return: int
+ */
+
+int _strlen(char *s)
+{
+	int length = 0;
+
+	while (*s++)
+		length += 1;
+	return (length);
+}
+
+/**
  * _strdup - Function to duplicate a string
  * @str: String to be duplicated
  *
@@ -54,7 +69,7 @@ char *_strdup (char *str)
 	int i, length;
 	char *duplicate;
 
-	length = strlen(str);
+	length = _strlen(str);
 	duplicate = malloc(length + 1);
 
 	for (i = 0; str[i]; i++)

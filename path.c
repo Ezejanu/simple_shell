@@ -12,12 +12,12 @@ char *findpath(char *command)
 	int length;
 	struct stat statbuf;
 
-	length = strlen(command);
+	length = _strlen(command);
 	pathname = getenv("PATH");
 	duplicate = _strdup(pathname);
 	token = strtok(duplicate, delim);
 	do {
-		filepath = malloc(strlen(token) + length + 2);
+		filepath = malloc(_strlen(token) + length + 2);
 		if (filepath == NULL)
 		{
 			perror("Error:");

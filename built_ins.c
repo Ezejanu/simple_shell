@@ -12,7 +12,7 @@ int endprog(char *command)
 	char *Exit = "exit";
 	char *msg = "exit\n\n[Disconnected...]\n";
 
-	if (strlen(command) != 4)
+	if (_strlen(command) != 4)
 		return (0);
 
 	for (i = 0; i < 4; i++)
@@ -35,7 +35,7 @@ void _env(char *tmpenv)
         int i;
         char *Env = "env";
 
-        if (strlen(tmpenv) != 3)
+        if (_strlen(tmpenv) != 3)
                 return;
 
         for (i = 0; i < 3; i++)
