@@ -1,4 +1,5 @@
-#include "main.h"
+#include "shell.h"
+#include "printf.h"
 
 /**
  * endprog - a function to end and exit our simple shell
@@ -19,6 +20,6 @@ int endprog(char *command)
 		if (command[i] != Exit[i])
 			return (0);
 	}
-	printf("exit\n\n[Disconnected...]\n");
+	_printf("exit\n\n[Disconnected...]\n");
 	return (1);
 }

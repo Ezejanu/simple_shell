@@ -1,4 +1,5 @@
-#include "main.h"
+#include "shell.h"
+#include "printf.h"
 
 /**
  * findpath - a function to find the path of a function
