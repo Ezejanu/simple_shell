@@ -10,7 +10,7 @@ int main(void)
 	char *prompt = "our shell $: ";
 	char *command = NULL;
 	char *commtoken = NULL, *argtoken = NULL, *delim = "\n", *delim2 = " ";
-	char *argv[1024], *tmp = NULL, *tmpcmp = NULL, *Error = "Error";
+	char *argv[1024], *tmp = NULL, *tmpcmp = NULL, *tmpenv = NULL, *Error = "Error";
 	size_t n = 0;
 	int status, i = 1;
 	pid_t childproc;
@@ -27,7 +27,8 @@ int main(void)
 		{
 			return (1);
 		}
-
+		tmpenv = strdup(commtoken);
+		_env(tmpenv);
 		argtoken = strtok(commtoken, delim2);
 
 		tmp = strdup(argtoken);

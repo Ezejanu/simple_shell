@@ -10,7 +10,10 @@
 #include <string.h>
 #include <unistd.h>
 
+extern char **environ;
+
 char * findpath(char * command);
 int endprog(char *command);
+void _env(char *tmpenv);
 
 #endif
