@@ -12,8 +12,7 @@ int main(void)
 	char *commtoken = NULL, *argtoken = NULL, *delim = "\n", *delim2 = " ";
 	char *argv[1024], *tmp = NULL, *tmpcmp = NULL, *tmpenv = NULL, *Error = "Error";
 	size_t n = 0;
-	int status, i = 1;
-	pid_t childproc;
+	int i = 1;
 
 	printf("%s", prompt);
 	while (1)
@@ -46,20 +45,9 @@ int main(void)
 		{
 			argv[0] = findpath(tmp);
 
-			childproc = fork();
-			if (childproc == -1)
-			{
-				perror("Error");
-				return (1);
-			}
-		if (childproc == 0)
-		{
-			if (execve(argv[0], argv, NULL) == -1)
-				perror("Error");
+			_fork(argv);
 		}
-			else
-				wait(&status);
-			}
+
 		else
 		{
 			perror("Error:");
