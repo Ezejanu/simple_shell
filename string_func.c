@@ -64,7 +64,7 @@ int _strlen(char *s)
  * Return: pointer to the duplicated string
  */
 
-char *_strdup (char *str)
+char *_strdup(char *str)
 {
 	int i, length;
 	char *duplicate;

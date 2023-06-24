@@ -1,7 +1,8 @@
 #include "main.h"
 
 /**
- *
+ * _fork - a function to fork a child process and execute the function
+ * @argv: string to be forked
  */
 
 void _fork(char *argv[])
