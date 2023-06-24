@@ -1,16 +1,15 @@
 #include "main.h"
 
 /**
- * main - a function to print the environment
- * @ac: parameter not used
- * @av: parameter not used
- * @env: environment to be printed
+ * _env - a function to compare if command is 'env'
+ * and print the environment if it is a match
+ * @tmpenv: command to be compared and printed
  */
 
 void _env(char *tmpenv)
 {
 	int i;
-	char * Env = "env";
+	char *Env = "env";
 
 	if (strlen(tmpenv) != 3)
 		return;
@@ -25,5 +24,4 @@ void _env(char *tmpenv)
 	{
 		printf("%s\n", environ[i]);
 	}
-	return;
 }

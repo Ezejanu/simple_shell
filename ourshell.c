@@ -66,6 +66,6 @@ int main(void)
 		}
 		printf("%s", prompt);
 	}
-	free(command);
+	free(command); free(tmp); free(tmpcmp); free(tmpenv);
 	return (0);
 }
