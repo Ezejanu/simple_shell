@@ -1,5 +1,4 @@
-#include "shell.h"
-#include "printf.h"
+#include "main.h"
 
 /**
  * main - a simple shell
@@ -66,11 +65,8 @@ int main(void)
 			perror("Error:");
 		}
 		empty(argv);
-		free(tmpcmp);
-		free(tmp);
-		free(tmpenv);
 		printf("%s", prompt);
 	}
-	free(command); 	
+	free(command); free(tmp); free(tmpcmp); free(tmpenv);
 	return (0);
 }

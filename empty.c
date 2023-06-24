@@ -1,5 +1,4 @@
-#include "shell.h"
-#include "printf.h"
+#include "main.h"
 
 /**
  * empty - A function to free argv

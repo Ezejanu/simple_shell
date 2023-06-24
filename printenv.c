@@ -1,5 +1,4 @@
-#include "shell.h"
-#include "printf.h"
+#include "main.h"
 
 /**
  * _env - a function to compare if command is 'env'
