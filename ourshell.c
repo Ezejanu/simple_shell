@@ -65,6 +65,7 @@ int main(void)
 			perror("Error:");
 		}
 		empty(argv);
+		i = 1;
 		printf("%s", prompt);
 	}
 	free(command); free(tmp); free(tmpcmp); free(tmpenv);
