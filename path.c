@@ -26,7 +26,7 @@ char *findpath(char *command)
 			return (NULL);
 			/*OR exit() to leave the program completely since malloc failed*/
 		}
-		strcpy(filepath, token);
+		_strcpy(filepath, token);
 		strcat(filepath, "/");
 		strcat(filepath, command);
 		strcat(filepath, "\0");

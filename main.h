@@ -12,6 +12,9 @@
 
 extern char **environ;
 
+/*String Functions*/
+char *_strcpy(char *dest, const char *src);
+
 char * findpath(char * command);
 int endprog(char *command);
 void _env(char *tmpenv);
