@@ -16,5 +16,6 @@ char * findpath(char * command);
 int endprog(char *command);
 void _env(char *tmpenv);
 void empty(char *argv[]);
+ void _write(char *str);
 
 #endif

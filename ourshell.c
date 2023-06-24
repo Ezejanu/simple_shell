@@ -15,7 +15,7 @@ int main(void)
 	int status, i = 1;
 	pid_t childproc;
 
-	printf("%s", prompt);
+	_write(prompt);
 	while (1)
 	{
 		if (getline(&command, &n, stdin) == -1)
@@ -66,7 +66,7 @@ int main(void)
 		}
 		empty(argv);
 		i = 1;
-		printf("%s", prompt);
+		_write(prompt);
 	}
 	free(command); free(tmp); free(tmpcmp); free(tmpenv);
 	return (0);

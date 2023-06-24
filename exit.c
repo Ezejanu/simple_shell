@@ -10,6 +10,7 @@ int endprog(char *command)
 {
 	int i;
 	char *Exit = "exit";
+	char *msg = "exit\n\n[Disconnected...]\n";
 
 	if (strlen(command) != 4)
 		return (0);
@@ -19,6 +20,6 @@ int endprog(char *command)
 		if (command[i] != Exit[i])
 			return (0);
 	}
-	printf("exit\n\n[Disconnected...]\n");
+	_write(msg);
 	return (1);
 }

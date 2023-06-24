@@ -22,6 +22,7 @@ void _env(char *tmpenv)
 
 	for (i = 0; environ[i] != NULL; i++)
 	{
-		printf("%s\n", environ[i]);
+		_write(environ[i]);
+		_write("\n");
 	}
 }
