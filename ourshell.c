@@ -14,7 +14,7 @@ int main(void)
 	size_t n = 0;
 	int i = 1;
 
-	printf("%s", prompt);
+	_write(prompt);
 	while (1)
 	{
 		if (getline(&command, &n, stdin) == -1)
@@ -54,7 +54,7 @@ int main(void)
 		}
 		empty(argv);
 		i = 1;
-		printf("%s", prompt);
+		_write(prompt);
 	}
 	free(command); free(tmp); free(tmpcmp); free(tmpenv);
 	return (0);
