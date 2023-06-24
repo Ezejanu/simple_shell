@@ -1,8 +1,8 @@
 #include "main.h"
 
-
 /**
- *
+ * main - a simple shell
+ * Return: 0 - success
  */
 
 int main(void)
@@ -14,13 +14,13 @@ int main(void)
 	size_t n = 0;
 	int status, i = 1;
 	pid_t childproc;
-	
+
 	printf("%s", prompt);
 	while (1)
 	{
 		if (getline(&command, &n, stdin) == -1)
 			return (-1);
-		
+
 		commtoken = strtok(command, delim);
 		tmpcmp = strdup(commtoken);
 		if (endprog(tmpcmp))
@@ -29,20 +29,19 @@ int main(void)
 		}
 
 		argtoken = strtok(commtoken, delim2);
-		
+
 		tmp = strdup(argtoken);
-		
+
 		argtoken = strtok(NULL, delim2);
-		if(argtoken!= NULL)
+		if (argtoken != NULL)
 		{
-			do
-			{
+			do {
 				argv[i++] = argtoken;
-			}
-			while ((argtoken = strtok(NULL, " ")));
+			} while
+			((argtoken = strtok(NULL, " ")));
 		}
 		argv[i] = NULL;
-		if(findpath(tmp) != Error)
+		if (findpath(tmp) != Error)
 		{
 			argv[0] = findpath(tmp);
 
@@ -51,7 +50,7 @@ int main(void)
 			{
 				perror("Error");
 				return (1);
-		}
+			}
 		if (childproc == 0)
 		{
 			if (execve(argv[0], argv, NULL) == -1)
@@ -64,10 +63,8 @@ int main(void)
 		{
 			perror("Error:");
 		}
-		printf("%s", prompt); 
-		
+		printf("%s", prompt);
 	}
 	free(command);
 	return (0);
 }
-	
