@@ -9,10 +9,9 @@ int main(void)
 {
 	char *prompt = "our shell $: ";
 	char *command = NULL;
-	char *commtoken = NULL, *argtoken = NULL, *delim = "\n", *delim2 = " ";
+	char *commtoken = NULL, *argtoken = NULL;
 	char *argv[1024], *tmp = NULL, *tmpcmp = NULL, *tmpenv = NULL, *Error = "Error";
-	size_t n = 0;
-	int i = 1;
+	size_t n = 0, i = 1;
 
 	_write(prompt);
 	while (1)
@@ -20,7 +19,7 @@ int main(void)
 		if (getline(&command, &n, stdin) == -1)
 			return (-1);
 
-		commtoken = strtok(command, delim);
+		commtoken = strtok(command, "\n");
 		tmpcmp = strdup(commtoken);
 		if (endprog(tmpcmp))
 		{
@@ -28,11 +27,11 @@ int main(void)
 		}
 		tmpenv = strdup(commtoken);
 		_env(tmpenv);
-		argtoken = strtok(commtoken, delim2);
+		argtoken = strtok(commtoken, " ");
 
 		tmp = strdup(argtoken);
 
-		argtoken = strtok(NULL, delim2);
+		argtoken = strtok(NULL, " ");
 		if (argtoken != NULL)
 		{
 			do {
@@ -44,7 +43,6 @@ int main(void)
 		if (findpath(tmp) != Error)
 		{
 			argv[0] = findpath(tmp);
-
 			_fork(argv);
 		}
 
