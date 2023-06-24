@@ -15,5 +15,6 @@ extern char **environ;
 char * findpath(char * command);
 int endprog(char *command);
 void _env(char *tmpenv);
+void empty(char *argv[]);
 
 #endif
