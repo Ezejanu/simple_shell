@@ -14,7 +14,7 @@ char *findpath(char *command)
 
 	length = strlen(command);
 	pathname = getenv("PATH");
-	duplicate = strdup(pathname);
+	duplicate = _strdup(pathname);
 	token = strtok(duplicate, delim);
 	do {
 		filepath = malloc(strlen(token) + length + 2);
@@ -27,9 +27,9 @@ char *findpath(char *command)
 			/*OR exit() to leave the program completely since malloc failed*/
 		}
 		_strcpy(filepath, token);
-		strcat(filepath, "/");
-		strcat(filepath, command);
-		strcat(filepath, "\0");
+		_strcat(filepath, "/");
+		_strcat(filepath, command);
+		_strcat(filepath, "\0");
 		if (stat(filepath, &statbuf) == 0)
 		{
 			free(duplicate);

@@ -14,6 +14,8 @@ extern char **environ;
 
 /*String Functions*/
 char *_strcpy(char *dest, const char *src);
+char *_strcat(char *dest, char *src);
+char *_strdup (char *str);
 
 char * findpath(char * command);
 int endprog(char *command);

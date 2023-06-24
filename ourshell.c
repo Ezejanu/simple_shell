@@ -20,16 +20,16 @@ int main(void)
 			return (-1);
 
 		commtoken = strtok(command, "\n");
-		tmpcmp = strdup(commtoken);
+		tmpcmp = _strdup(commtoken);
 		if (endprog(tmpcmp))
 		{
 			return (1);
 		}
-		tmpenv = strdup(commtoken);
+		tmpenv = _strdup(commtoken);
 		_env(tmpenv);
 		argtoken = strtok(commtoken, " ");
 
-		tmp = strdup(argtoken);
+		tmp = _strdup(argtoken);
 
 		argtoken = strtok(NULL, " ");
 		if (argtoken != NULL)
