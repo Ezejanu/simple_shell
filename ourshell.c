@@ -7,9 +7,9 @@
 
 int main(void)
 {
-	char *command = NULL; char *prompt = "our shell $: ";
+	char *command = NULL, *prompt = "our shell $: ";
 	char *commtoken = NULL, *argtoken = NULL;
-	char *argv[1024], *tmp = NULL, *tmpcmp = NULL, *tmpenv = NULL, *Error = "Error";
+	char *argv[1024], *tmp = NULL, *tmpenv = NULL, *Error = "Error";
 	size_t n = 0, i = 1;
 
 	_write(prompt);
@@ -22,11 +22,9 @@ int main(void)
 			continue;
 
 		commtoken = strtok(command, "\n");
-		tmpcmp = _strdup(commtoken);
-		if (endprog(tmpcmp))
-		{
-			return (1);
-		}
+		if (check_command(commtoken) == 3)
+			exit(EXIT_SUCCESS);
+
 		tmpenv = _strdup(commtoken);
 		_env(tmpenv);
 		argtoken = strtok(commtoken, " ");
@@ -56,6 +54,6 @@ int main(void)
 		i = 1;
 		_write(prompt);
 	}
-	free(command); free(tmp); free(tmpcmp); free(tmpenv);
+	free(command); free(tmp); free(tmpenv);
 	return (0);
 }

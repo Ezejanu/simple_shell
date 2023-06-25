@@ -37,9 +37,9 @@ void _fork(char *argv[])
 
 int check_command(char *command)
 {
-	/**
-	char *commtoken = NULL, char *new_line = "\n";
-	*tmpcmp = NULL, *tmpenv = NULL */
+
+/*	char *commtoken = NULL;*/
+	char *tmpcmp = NULL; /* *tmpenv = NULL;*/
     char *new_line = "\n";	char *prompt = "our shell $: ";
 
 	if (strcmp(command, new_line) == 0)
@@ -47,13 +47,12 @@ int check_command(char *command)
 		_write(prompt);
 			return(2);
 	}
-	/*
-		commtoken = strtok(command, "\n");
-        tmpcmp = _strdup(commtoken);
+
+		tmpcmp = _strdup(command);
         if (endprog(tmpcmp))
         {
-            return (1);
+            return (3);
         }
-		*/
+
 return (0);
 }
