@@ -7,8 +7,7 @@
 
 int main(void)
 {
-	char *prompt = "our shell $: ";
-	char *command = NULL; char *new_line = "\n";
+	char *command = NULL; char *prompt = "our shell $: ";
 	char *commtoken = NULL, *argtoken = NULL;
 	char *argv[1024], *tmp = NULL, *tmpcmp = NULL, *tmpenv = NULL, *Error = "Error";
 	size_t n = 0, i = 1;
@@ -19,11 +18,9 @@ int main(void)
 		if (getline(&command, &n, stdin) == -1)
 			return (-1);
 	
-		if (strcmp(command, new_line) == 0)
-		{
-			_write(prompt);
+		if (check_command(command) == 2)
 			continue;
-		}
+
 		commtoken = strtok(command, "\n");
 		tmpcmp = _strdup(commtoken);
 		if (endprog(tmpcmp))

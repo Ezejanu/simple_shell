@@ -11,6 +11,7 @@
 #include <unistd.h>
 
 extern char **environ;
+/* char *prompt = "our shell $: "; */
 
 /*String Functions*/
 int _strlen(char *s);
@@ -24,6 +25,6 @@ void _env(char *tmpenv);
 void empty(char *argv[]);
 void _fork(char *argv[]);
 void _write(char *str);
-
+int check_command(char *command);
 
 #endif

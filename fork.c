@@ -24,3 +24,36 @@ void _fork(char *argv[])
 	else
 		wait(&status);
 }
+
+
+
+
+
+/**
+ * check_command - a function to check what command is typed in/received from the terminal
+ * @command: command to be checked
+ * Return: a pointer to t
+ */
+
+int check_command(char *command)
+{
+	/**
+	char *commtoken = NULL, char *new_line = "\n";
+	*tmpcmp = NULL, *tmpenv = NULL */
+    char *new_line = "\n";	char *prompt = "our shell $: ";
+
+	if (strcmp(command, new_line) == 0)
+	{
+		_write(prompt);
+			return(2);
+	}
+	/*
+		commtoken = strtok(command, "\n");
+        tmpcmp = _strdup(commtoken);
+        if (endprog(tmpcmp))
+        {
+            return (1);
+        }
+		*/
+return (0);
+}
