@@ -41,7 +41,7 @@ int check_command(char *command)
 /*	char *commtoken = NULL;*/
 	char *tmpcmp = NULL; /* *tmpenv = NULL;*/
     char *new_line = "\n";	char *prompt = "our shell $: ";
-
+	struct stat statbuf;
 	if (strcmp(command, new_line) == 0)
 	{
 		_write(prompt);
@@ -50,9 +50,10 @@ int check_command(char *command)
 
 		tmpcmp = _strdup(command);
         if (endprog(tmpcmp))
-        {
             return (3);
-        }
+	
+		if (stat(command, &statbuf) == 0)
+		return (4);
 
 return (0);
 }

@@ -12,6 +12,9 @@ char *findpath(char *command)
 	int length;
 	struct stat statbuf;
 
+	if (check_command(command) == 4)
+		return (command);
+
 	length = _strlen(command);
 	pathname = getenv("PATH");
 	duplicate = _strdup(pathname);
