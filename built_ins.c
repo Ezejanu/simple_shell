@@ -25,6 +25,21 @@ int endprog(char *command)
 }
 
 /**
+ * 
+ */
+void _printenv()
+{
+	int i;
+
+	for (i = 0; environ[i] != NULL; i++)
+    {
+        _write(environ[i]);
+        _write("\n");
+    }
+}
+
+
+/**
  * _env - a function to compare if command is 'env'
  * and print the environment if it is a match
  * @tmpenv: command to be compared and printed
@@ -32,19 +47,31 @@ int endprog(char *command)
 
 void _env(char *tmpenv)
 {
-	int i;
+	int i, comm_leng;
+	struct stat statbuf;
+
 	char *Env = "env";
+
+	comm_leng = _strlen(tmpenv);
+	if (comm_leng > 3)
+	{
+			if (tmpenv[comm_leng] == Env[3] && tmpenv[comm_leng - 1] == Env[2] && tmpenv[comm_leng - 2] == Env[1])
+			{
+					if (stat(tmpenv, &statbuf) == 0)
+					{
+						_printenv(tmpenv);
+						return;
+					}
+			}
+	}
 
 	if (_strlen(tmpenv) != 3)
 		return;
+	
 	for (i = 0; i < 3; i++)
 	{
 		if (tmpenv[i] != Env[i])
-		return;
+			return;
 	}
-	for (i = 0; environ[i] != NULL; i++)
-	{
-		_write(environ[i]);
-		_write("\n");
-	}
+	_printenv(tmpenv);
 }

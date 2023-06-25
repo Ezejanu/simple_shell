@@ -25,8 +25,9 @@ int main(void)
 		if (check_command(commtoken) == 3)
 			exit(EXIT_SUCCESS);
 
-		tmpenv = _strdup(commtoken);
-		_env(tmpenv);
+/*		tmpenv = _strdup(commtoken); */
+
+		_env(commtoken);
 		argtoken = strtok(commtoken, " ");
 
 		tmp = _strdup(argtoken);
