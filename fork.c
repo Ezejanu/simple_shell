@@ -5,7 +5,7 @@
  * @argv: string to be forked
  */
 
-void _fork(char *argv[])
+void _fork(char *argv[], char *env[])
 {
 	pid_t childproc;
 	int status;
@@ -18,7 +18,7 @@ void _fork(char *argv[])
 	}
 	else if (childproc == 0)
 	{
-		if (execve(argv[0], argv, NULL) == -1)
+		if (execve(argv[0], argv, env) == -1)
 			perror("Error");
 	}
 	else

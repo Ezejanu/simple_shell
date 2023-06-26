@@ -5,11 +5,12 @@
  * Return: 0 - success
  */
 
-int main(void)
+int main(int ac, char *av[], char *env[])
 {
 	char *command = NULL, *prompt = "our shell $: ", *Error = "Error";
 	char *commtoken = NULL, *argtoken = NULL, *tmp = NULL, *argv[1024];
 	size_t n = 0, i = 1;
+	(void) ac; (void) av;
 
 	_write(prompt);
 	while (1)
@@ -41,7 +42,7 @@ int main(void)
 		if (findpath(tmp) != Error)
 		{
 			argv[0] = findpath(tmp);
-			_fork(argv);
+			_fork(argv, env);
 		}
 		
 		else

@@ -23,8 +23,8 @@ char *findpath(char *command);
 int endprog(char *command);
 void _env(char *tmpenv);
 void empty(char *argv[]);
-void _fork(char *argv[]);
 void _write(char *str);
+void _fork(char *argv[], char *env[]);
 int check_command(char *command);
 
 #endif
