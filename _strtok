@@ -1,0 +1,78 @@
+#include "main.h"
+
+/**
+ * _strtok - a function to extract tokens from a string
+ * @delim: delimeter to be searched for
+ *
+ * Return: a pointer to a null-terminated string containing the next token
+ * or NULL if no more tokens are found
+ */
+
+
+
+char *_strtok(char *str, char *delim)
+{
+	const char *cpy = strdup(str);
+	static char *remainder = cpy;
+	char *token;
+	int index = _strncmp(remainder, delim), i;
+
+	if (index == -1)
+		return (NULL);
+
+	for (i = 0; i < index; i++)
+		token[i] = remainder[i];
+	token[i] = "\0";
+
+	remainder += index;
+	remainder++;
+	
+	printf("%s\n", token[0]);
+	return (token);
+}
+int _strcmp(char *s1, char *s2)
+{ 
+	size_t i, j, n;
+	n = strlen(s2);
+
+ for (i = 0, j = 0; i < (strlen(s1)) && j < n; i++, j++)
+        {
+                if (s1[i] != s2[j])
+                        return (0);
+
+	}
+
+        return(1);
+}
+
+int _strncmp(char *s1, char *s2)
+{
+	size_t i; 
+
+
+	for (i = 0; i < (strlen(s1)); i++)
+	{
+		if (_strcmp(s1, s2))
+			return (i);
+
+		s1++;
+	}
+
+	return (-1);
+}
+
+int main(void)
+{
+	char *s1 = "Aishah Mabayoje";
+	char *s2 = "a";
+	char *token = NULL;
+
+	token = _strtok(s1, s2);
+	token = _strtok(NULL, s2);
+	
+	return (0);
+}
+
+
+
+
