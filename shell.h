@@ -11,18 +11,19 @@
 #include <unistd.h>
 
 extern char **environ;
+#define MAX_TOKENS 1024
 /* char *prompt = "our shell $: "; */
 
 /*Functions*/
 
 /* Parse Function */
-void parseUserInput(char *tokenizedCommand[], char *userInput);
+void parseUserInput(char *userInput, char *tokenizedCommand[]);
 int executeCommand(char *tokenizedCommand[], char *env[]);
 
 /* Built ins */
 int shouldExit(char *command);
 void _printEnv();
-void isEnvCommand(char *command);
+int isEnvCommand(char *command);
 
 /* Execute Functions */
 void executeGenericCommand(char *tokenizedCommand[], char *env[]);
@@ -32,4 +33,5 @@ void _fork(char *tokenizedCommand[], char *env[]);
 
 /* Helper Functions*/
 void _write(char *str);
+void freeTokenizedCommand(char **tokenizedCommand);
 #endif

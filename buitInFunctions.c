@@ -17,7 +17,7 @@ int shouldExit(char *command)
     {
         return (1);
     }
-    return (0)
+    return (0);
 }
 
 /**
@@ -26,23 +26,22 @@ int shouldExit(char *command)
  *
  * @command: command to be compared and printed.
  *
- * Return: void.
+ * Return: 1 if command is env, 0 otherwise.
  */
 
-void isEnvCommand(char *command)
+int isEnvCommand(char *command)
 {
-    int i, commandLength;
+    char *expectedEnvCommand = "env";
+    int commandLength = strlen(command);
+    char lastThreeChar[3];
     struct stat statbuf;
 
-    char *expectedEnvCommand = "env";
+    lastThreeChar[0] = command[commandLength - 3];
+    lastThreeChar[1] = command[commandLength - 2];
+    lastThreeChar[2] = command[commandLength - 1];
+    
 
-    int commandLength = strlen(command);
-    char lastThreeChar[3] = {
-        command[commandLength - 3],
-        command[commandLength - 2],
-        command[commandLength - 1]};
-
-    if (strcmp(command, expectedEnvCommand) == 0)
+    if (strcmp(lastThreeChar, expectedEnvCommand) == 0)
     {
         if (
             commandLength == 3 ||

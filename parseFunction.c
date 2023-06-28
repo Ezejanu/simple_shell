@@ -1,29 +1,17 @@
 #include "shell.h"
 
-/**
- * parseUserInput - A function to provide a cleaned and analysed version
- * of the user input as a list of command tokens.
- *
- * @userInput: A pointer to the user's input.
- *
- * Return: A pointer to the tokenized command.
- */
-
-/* We made a change here to the function header, to take care of the local variable issue*/
-void parseUserInput(char *tokenizedCommand[], char *userInput)
+void parseUserInput(char *userInput, char *tokenizedCommand[])
 {
-    char token[1024];
     int i = 0;
 
-    /* Replace new line character with NULL. */
-    userInput[strlen(UserInput) - 1] = NULL;
-
-    token = strtok(userInput, " ");
-    do
+    char *token = strtok(userInput, " ");
+    while (token != NULL && i < MAX_TOKENS)
     {
-        strcpy(tokenizedCommand[i], token);
+        tokenizedCommand[i] = strdup(token);
         i++;
-    } while (token = strtok(NULL, " "));
+        token = strtok(NULL, " ");
+    }
 
-    return;
+    /* Add a NULL pointer at the end of the tokenized command*/
+    tokenizedCommand[i] = NULL;
 }

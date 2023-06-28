@@ -15,14 +15,16 @@ int executeCommand(char *tokenizedCommand[], char *env[])
 {
     char *msg = "exit\n\n[Disconnected...]\n";
     char *filePath = tokenizedCommand[0];
+	(void)env;
+    printf("File path -> %s", filePath);
 
-    if (shouldExit(filePath))
+	if (shouldExit(filePath))
     {
         _write(msg);
         return (1);
     }
 
-    if (strlen(tokenizedCommand) == 1 && filePath == NULL)
+    if (strlen(tokenizedCommand[0]) == 0)
     {
         return (0);
     }
@@ -33,7 +35,7 @@ int executeCommand(char *tokenizedCommand[], char *env[])
         return (0);
     }
 
-    executeGenericCommand(tokenizedCommand, env);
+    /*executeGenericCommand(tokenizedCommand, env);*/
 
     return (0);
 }
@@ -59,7 +61,7 @@ void executeGenericCommand(char *tokenizedCommand[], char *env[])
     char commandPath[1024];
     char *revisedTokenizedCommand[1024];
 
-    if (stat(tokenizedCommand, &statbuf) == 0)
+    if (stat(tokenizedCommand[0], &statbuf) == 0)
     {
         _fork(tokenizedCommand, env);
         return;
