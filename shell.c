@@ -18,32 +18,19 @@ int main(int ac, char **av, char *env[])
 
 	(void)ac;
 	(void)av;
-	
-	
-	/**
-	* check if it is non interactive
-	* copy from av[1] to the pipe into a string and pass into parse to parse
-	* *clean results from parse by removing " - quototion */
 
-	/* Check if running in non-interactive mode */
-	
-	if (!isatty(STDIN_FILENO)) 
+	if (!isatty(STDIN_FILENO))
 	{
-	/* Read input from standard input (e.g., using fgets) */
-		if (fgets(userInput, sizeof(userInput), stdin) == NULL) 
+		if (fgets(userInput, sizeof(userInput), stdin) == NULL)
 		{
 			perror("Error reading input");
-			return 1;
+			return (1);
 		}
-		/* Remove the trailing newline character */
 		userInput[strcspn(userInput, "\n")] = '\0';
-
-		/* Process the input */
 		parseUserInput(userInput, tokenizedCommand);
 		interrupted = executeCommand(tokenizedCommand, env);
 		freeTokenizedCommand(tokenizedCommand);
-
-		return 0;
+		return (0);
 	}
 
 	do {
@@ -51,24 +38,15 @@ int main(int ac, char **av, char *env[])
 
 		if (fgets(userInput, sizeof(userInput), stdin) == NULL)
 		{
-			/* Handle EOF */
 			interrupted = 1;
 			continue;
 		}
-
-		/* Remove the trailing newline character from userInput */
 		userInput[strcspn(userInput, "\n")] = '\0';
 
-		/* Handle empty Line */
 		if (userInput[0] == '\0')
 			continue;
-
 		parseUserInput(userInput, tokenizedCommand);
-
-		/* Use the tokenized command */
 		interrupted = executeCommand(tokenizedCommand, env);
-
-		/* Free the dynamically allocated memory*/
 		freeTokenizedCommand(tokenizedCommand);
 
 	} while (!interrupted);
