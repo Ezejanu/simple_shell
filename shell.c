@@ -18,7 +18,30 @@ int main(int ac, char **av, char *env[])
 
 	(void)ac;
 	(void)av;
+	
+	
+	/**
+	 * check if it is non interactive
+	 * copy from av[1] to the pipe into a string and pass into parse to parse
+	 * *clean results from parse by removing " - quototion */
 
+	 /* Check if running in non-interactive mode */
+    if (!isatty(STDIN_FILENO)) {
+        /* Read input from standard input (e.g., using fgets) */
+        if (fgets(userInput, sizeof(userInput), stdin) == NULL) {
+            perror("Error reading input");
+            return 1;
+        }
+        /* Remove the trailing newline character */
+        userInput[strcspn(userInput, "\n")] = '\0';
+
+        /* Process the input */
+        parseUserInput(userInput, tokenizedCommand);
+        interrupted = executeCommand(tokenizedCommand, env);
+        freeTokenizedCommand(tokenizedCommand);
+
+        return 0;
+    }
 	do {
 		printf("shell $: ");
 

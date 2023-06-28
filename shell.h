@@ -34,4 +34,5 @@ void _fork(char *tokenizedCommand[], char *env[]);
 /* Helper Functions*/
 void _write(char *str);
 void freeTokenizedCommand(char **tokenizedCommand);
+
 #endif
