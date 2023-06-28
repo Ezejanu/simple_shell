@@ -15,7 +15,8 @@ extern char **environ;
 
 /*Functions*/
 /* Parse Function */
-void parseUserInput(char *tokenizedCommand[1024], char *userInput);
+void parseUserInput(char *tokenizedCommand[], char *userInput);
+int executeCommand(char *tokenizedCommand[], char *env[]);
 
 /* Helper Functions*/
 void _write(char *str);

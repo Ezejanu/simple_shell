@@ -10,7 +10,7 @@
  */
 
 /* We made a change here to the function header, to take care of the local variable issue*/
-void parseUserInput(char *tokenizedCommand[1024], char *userInput)
+void parseUserInput(char *tokenizedCommand[], char *userInput)
 {
     char token[1024];
     int i = 0;
