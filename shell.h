@@ -22,7 +22,7 @@ int executeCommand(char *tokenizedCommand[], char *env[]);
 
 /* Built ins */
 int shouldExit(char *command);
-void _printEnv();
+void _printEnv(void);
 int isEnvCommand(char *command);
 
 /* Execute Functions */
