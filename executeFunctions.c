@@ -11,7 +11,7 @@
  * and 0 when the main loop can continue.
  */
 
-intexecuteCommand(char *tokenizedCommand[], char *env[])
+int executeCommand(char *tokenizedCommand[], char *env[])
 {
 	char *msg = "exit\n\n[Disconnected...]\n";
 	char *filePath = tokenizedCommand[0];
