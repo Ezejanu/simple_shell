@@ -9,42 +9,51 @@
  *
  * Return: void
  */
- 
- 
- /* We made a change here - resolved local variable issue for 'commandPath' */
- 
-void constructCommandPath(char commandPath[], char *command)
- {
-     char *envPaths = NULL;
-     char *path = NULL;
-     struct stat statbuf;
 
-     envPaths = strdup(getenv("PATH"));
-     path = strtok(envPaths, ":");
+void constructCommandPath(char *commandPath, char *command)
+{
+    char *envPaths = NULL;
+    char *path = NULL;
+    char *duplicate = NULL;
+    struct stat statbuf;
 
-     while (path != NULL)
-     {
-         strcpy(commandPath, path);
-         strcat(commandPath, "/");
-         strcat(commandPath, command);
-         strcat(commandPath, "\0");
+    envPaths = getenv("PATH");
+    duplicate = strdup(envPaths);
+    path = strtok(duplicate, ":");
 
-         if (stat(commandPath, &statbuf) == 0)
-         {
-             break;
-         }
-        /* Possible memory leak is NULL enough to free commandPath? where did the previous assignments go? */
-         commandPath = NULL;
-         path = strtok(NULL, ":");
-     }
+    while (path != NULL)
+    {
+        strcpy(commandPath, path);
+        strcat(commandPath, "/");
+        strcat(commandPath, command);
 
-     free(envPaths);
+        if (stat(commandPath, &statbuf) == 0)
+        {
+            break;
+        }
 
-     if (commandPath != NULL)
-     {
-         return;
-     }
+        memset(commandPath, 0, 1024);
+        path = strtok(NULL, ":");
+    }
 
-     perror("Did not find a valid path for command!");
-     return;
- }
+    free(duplicate);
+
+    if (commandPath[0] != '\0')
+    {
+        return;
+    }
+
+    perror("Did not find a valid path for command!");
+    return;
+}
+=======
+/**
+ * constructCommandPath - A function to construct the command path
+ * when the command is provided without its path.
+ * 
+ * @commandPath: where the constructed command path is stored.
+ * @command: the command whose path is to be generated.
+ *
+ * Return: void
+ */
+

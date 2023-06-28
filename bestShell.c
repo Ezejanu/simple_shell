@@ -1,39 +1,57 @@
 #include "shell.h"
-/**
- *  main - a simple shell
- * Return: 0 - success
- */
 
-int main(int argc, char *argv[], char *env[])
+int main(int ac, char **av, char *env[])
 {
-    char *userInput = NULL;
-    char *prompt = "shell $: ";
-    char *tokenizedCommand[1024];
-    size_t userInputLen = 0;
+    char userInput[1024];
+    char *tokenizedCommand[MAX_TOKENS];
     int interrupted = 0;
-
-    (void)argc;
-    (void)argv;
+    (void)ac;
+    (void)av;
+    
 
     do
     {
-        /*Prompt user*/
-        _write(prompt);
-
-        /*Read user input*/
-        if (getline(&userInput, &userInputLen, stdin) == -1)
+        printf("shell $: ");
+        if (fgets(userInput, sizeof(userInput), stdin) == NULL)
         {
-            /*Catch EOF.*/
+		/* Handle EOF */
             interrupted = 1;
             continue;
         }
 
-        /* We made a change here, to take care of the local variable issue*/
-        parseUserInput(tokenizedCommand, userInput);
-        interrupted = executeCommand(tokenizedCommand, env);
+
+        /* Remove the trailing newline character from userInput */
+        userInput[strcspn(userInput, "\n")] = '\0';
+
+	/* Handle empty Line */
+	if (userInput[0] == '\0')
+		continue;
+
+        parseUserInput(userInput, tokenizedCommand);
+
+        /* Use the tokenized command */
+        
+	  interrupted = executeCommand(tokenizedCommand, env);
+        /* Free the dynamically allocated memory*/
+        freeTokenizedCommand(tokenizedCommand);
+
+
     } while (!interrupted);
 
-        free(userInput);
+    return 0;
+}
 
-    return (0);
+/**
+ *
+ */
+
+void freeTokenizedCommand(char *tokenizedCommand[])
+{
+    int i = 0;
+    while (tokenizedCommand[i] != NULL)
+    {
+        free(tokenizedCommand[i]);
+        i++;
+    }
+
 }

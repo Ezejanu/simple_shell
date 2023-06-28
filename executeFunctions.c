@@ -15,16 +15,12 @@ int executeCommand(char *tokenizedCommand[], char *env[])
 {
     char *msg = "exit\n\n[Disconnected...]\n";
     char *filePath = tokenizedCommand[0];
+	(void)env;
 
-    if (shouldExit(filePath))
+	if (shouldExit(filePath))
     {
         _write(msg);
         return (1);
-    }
-
-    if (strlen(tokenizedCommand[0]) == 1 && filePath == NULL)
-    {
-        return (0);
     }
 
     if (isEnvCommand(filePath))
@@ -75,11 +71,6 @@ void executeGenericCommand(char *tokenizedCommand[], char *env[])
     {
         return;
     }
-    /**
-     * Alternative for handling local variable issues
-     * char *commandPath[1024];
-     * constructCommandPath(tokenizedCommand[0], &commandPath);
-     */
 
     duplicateArray(revisedTokenizedCommand, tokenizedCommand);
     revisedTokenizedCommand[0] = commandPath;
