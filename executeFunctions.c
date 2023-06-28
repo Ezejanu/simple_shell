@@ -108,4 +108,31 @@ void duplicateArray(char *duplicateArray[], char *originalArray[])
 
     return;
 }
-/* changes were made to this function - resolving the local variable issue */
+/* changes were made to the duplicateArray function - resolving the local variable issue */
+
+/**
+ * _fork - a function to fork a child process and execute the function
+ * @argv: string to be forked
+ * @env: passing the environment
+ * Return: void
+ */
+
+void _fork(char *tokenizedCommand[], char *env[])
+{
+    pid_t childproc;
+    int status;
+
+    childproc = fork();
+    if (childproc == -1)
+    {
+        perror("Error");
+        exit(0); /* do we need to exit here or just return? */
+    }
+    else if (childproc == 0)
+    {
+        if (execve(tokenizedCommand[0], tokenizedCommand, env) == -1)
+            perror("Unable to execute command");
+    }
+    else
+        wait(&status);
+}

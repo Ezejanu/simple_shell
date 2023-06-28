@@ -14,6 +14,7 @@ extern char **environ;
 /* char *prompt = "our shell $: "; */
 
 /*Functions*/
+
 /* Parse Function */
 void parseUserInput(char *tokenizedCommand[], char *userInput);
 int executeCommand(char *tokenizedCommand[], char *env[]);
@@ -24,10 +25,10 @@ void _printEnv();
 void isEnvCommand(char *command);
 
 /* Execute Functions */
-
 void executeGenericCommand(char *tokenizedCommand[], char *env[]);
 void constructCommandPath(char commandPath[], char *command);
 void duplicateArray(char *duplicateArray[], char *originalArray[]);
+void _fork(char *tokenizedCommand[], char *env[]);
 
 /* Helper Functions*/
 void _write(char *str);
