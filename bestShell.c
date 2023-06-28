@@ -13,6 +13,7 @@ int main()
         printf("shell $: ");
         if (fgets(userInput, sizeof(userInput), stdin) == NULL)
         {
+		/* Handle EOF */
             interrupted = 1;
             continue;
         }
@@ -20,7 +21,7 @@ int main()
         /* Remove the trailing newline character from userInput */
         userInput[strcspn(userInput, "\n")] = '\0';
 
-	/* Empty Line */
+	/* Handle empty Line */
 	if (userInput[0] == '\0')
 		continue;
 

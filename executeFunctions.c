@@ -24,11 +24,6 @@ int executeCommand(char *tokenizedCommand[], char *env[])
         return (1);
     }
 
-    if (strlen(tokenizedCommand[0]) == 0)
-    {
-        return (0);
-    }
-
     if (isEnvCommand(filePath))
     {
         _printEnv();
