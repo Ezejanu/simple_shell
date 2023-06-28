@@ -1,11 +1,12 @@
 #include "shell.h"
 
-int main()
+int main(int ac, char **av, char *env[])
 {
     char userInput[1024];
     char *tokenizedCommand[MAX_TOKENS];
     int interrupted = 0;
-    char *env[10];
+    (void)ac;
+    (void)av;
     
 
     do

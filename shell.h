@@ -27,7 +27,7 @@ int isEnvCommand(char *command);
 
 /* Execute Functions */
 void executeGenericCommand(char *tokenizedCommand[], char *env[]);
-void constructCommandPath(char commandPath[], char *command);
+void constructCommandPath(char *commandPath, char *command);
 void duplicateArray(char *duplicateArray[], char *originalArray[]);
 void _fork(char *tokenizedCommand[], char *env[]);
 

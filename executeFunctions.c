@@ -30,7 +30,7 @@ int executeCommand(char *tokenizedCommand[], char *env[])
         return (0);
     }
 
-    /*executeGenericCommand(tokenizedCommand, env);*/
+    executeGenericCommand(tokenizedCommand, env);
 
     return (0);
 }
@@ -68,10 +68,12 @@ void executeGenericCommand(char *tokenizedCommand[], char *env[])
      */
 
     constructCommandPath(commandPath, tokenizedCommand[0]);
+    printf("\n\nCommandPath -> %s\n", commandPath);
     if (commandPath == NULL)
     {
         return;
     }
+    printf("\n\nCommandPath -> %s\n", commandPath);
     /**
      * Alternative for handling local variable issues
      * char *commandPath[1024];
