@@ -8,11 +8,8 @@ void constructCommandPath(char *commandPath, char *command)
     struct stat statbuf;
 
     envPaths = getenv("PATH");
-    printf("\n\nenvPaths -> %s", envPaths);
     duplicate = strdup(envPaths);
-    printf("\nDuplicate -> %s", duplicate);
     path = strtok(duplicate, ":");
-    printf("\n\nPath -> %s", path);
 
     while (path != NULL)
     {

@@ -28,11 +28,9 @@ int main(int ac, char **av, char *env[])
 
         parseUserInput(userInput, tokenizedCommand);
 
-	printf("[0] -> %s\n[1] -> %s\n", tokenizedCommand[0], tokenizedCommand[1]);
-        /** Use the tokenized command
-        * ...
-	*/
-	interrupted = executeCommand(tokenizedCommand, env);
+        /* Use the tokenized command */
+        
+	  interrupted = executeCommand(tokenizedCommand, env);
         /* Free the dynamically allocated memory*/
         freeTokenizedCommand(tokenizedCommand);
 
