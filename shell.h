@@ -14,5 +14,9 @@ extern char **environ;
 /* char *prompt = "our shell $: "; */
 
 /*Functions*/
-void _write(char *);
+/* Parse Function */
+void parseUserInput(char *tokenizedCommand[1024], char *userInput);
+
+/* Helper Functions*/
+void _write(char *str);
 #endif

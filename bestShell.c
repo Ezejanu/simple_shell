@@ -28,7 +28,8 @@ int main(int argc, char *argv[], char *env[])
             continue;
         }
 
-        tokenizedCommand = parseUserInput(userInput);
+        /* We made a change here, to take care of the local variable issue*/
+        parseUserInput(tokenizedCommand, userInput);
         interrupted = executeCommand(tokenizedCommand, env)
     } while (!interrupted)
 
