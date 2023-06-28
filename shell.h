@@ -13,6 +13,6 @@
 extern char **environ;
 /* char *prompt = "our shell $: "; */
 
-/*String Functions*/
-
+/*Functions*/
+void _write(char *);
 #endif
