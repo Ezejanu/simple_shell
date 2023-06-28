@@ -1,5 +1,15 @@
 #include "shell.h"
 
+/**
+ * constructCommandPath - A function to construct the command path
+ * when the command is provided without its path.
+ * 
+ * @commandPath: where the constructed command path is stored.
+ * @command: the command whose path is to be generated.
+ *
+ * Return: void
+ */
+
 void constructCommandPath(char *commandPath, char *command)
 {
     char *envPaths = NULL;
@@ -36,3 +46,14 @@ void constructCommandPath(char *commandPath, char *command)
     perror("Did not find a valid path for command!");
     return;
 }
+=======
+/**
+ * constructCommandPath - A function to construct the command path
+ * when the command is provided without its path.
+ * 
+ * @commandPath: where the constructed command path is stored.
+ * @command: the command whose path is to be generated.
+ *
+ * Return: void
+ */
+

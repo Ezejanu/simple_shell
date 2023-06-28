@@ -19,6 +19,7 @@ int main(int ac, char **av, char *env[])
             continue;
         }
 
+
         /* Remove the trailing newline character from userInput */
         userInput[strcspn(userInput, "\n")] = '\0';
 
@@ -33,6 +34,7 @@ int main(int ac, char **av, char *env[])
 	  interrupted = executeCommand(tokenizedCommand, env);
         /* Free the dynamically allocated memory*/
         freeTokenizedCommand(tokenizedCommand);
+
 
     } while (!interrupted);
 
@@ -51,4 +53,5 @@ void freeTokenizedCommand(char *tokenizedCommand[])
         free(tokenizedCommand[i]);
         i++;
     }
+
 }
