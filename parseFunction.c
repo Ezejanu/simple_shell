@@ -12,18 +12,18 @@
 /* We made a change here to the function header, to take care of the local variable issue*/
 void parseUserInput(char *tokenizedCommand[], char *userInput)
 {
-    char token[1024];
+    char *token;
     int i = 0;
 
     /* Replace new line character with NULL. */
-    userInput[strlen(UserInput) - 1] = NULL;
+    userInput[strlen(userInput) - 1] = '\0';
 
     token = strtok(userInput, " ");
     do
     {
         strcpy(tokenizedCommand[i], token);
         i++;
-    } while (token = strtok(NULL, " "));
+    } while ((token = strtok(NULL, " ")));
 
     return;
 }

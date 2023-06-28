@@ -22,7 +22,7 @@ int executeCommand(char *tokenizedCommand[], char *env[])
         return (1);
     }
 
-    if (strlen(tokenizedCommand) == 1 && filePath == NULL)
+    if (strlen(tokenizedCommand[0]) == 1 && filePath == NULL)
     {
         return (0);
     }
@@ -59,7 +59,7 @@ void executeGenericCommand(char *tokenizedCommand[], char *env[])
     char commandPath[1024];
     char *revisedTokenizedCommand[1024];
 
-    if (stat(tokenizedCommand, &statbuf) == 0)
+    if (stat(tokenizedCommand[0], &statbuf) == 0)
     {
         _fork(tokenizedCommand, env);
         return;
