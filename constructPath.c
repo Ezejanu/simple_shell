@@ -8,7 +8,7 @@
  * @command: the command whose path is to be generated.
  *
  * Return: void
- * /
+ */
  
  
  /* We made a change here - resolved local variable issue for 'commandPath' */
