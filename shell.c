@@ -51,7 +51,7 @@ int main(int ac, char **av, char *env[])
 
 	} while (!interrupted);
 
-	return (0);
+	exit(EXIT_FAILURE);
 }
 
 /**
