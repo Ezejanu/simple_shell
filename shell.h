@@ -24,9 +24,11 @@ void _printEnv();
 void isEnvCommand(char *command);
 
 /* Execute Functions */
-void executeGenericCommand(char *tokenizedCommand[], char *env[]);
-void duplicateArray(char *duplicateArray[], char *originalArray[])
 
-    /* Helper Functions*/
-    void _write(char *str);
+void executeGenericCommand(char *tokenizedCommand[], char *env[]);
+void constructCommandPath(char commandPath[], char *command);
+void duplicateArray(char *duplicateArray[], char *originalArray[]);
+
+/* Helper Functions*/
+void _write(char *str);
 #endif

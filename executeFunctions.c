@@ -56,7 +56,7 @@ void executeGenericCommand(char *tokenizedCommand[], char *env[])
      */
 
     struct stat statbuf;
-    char *commandPath;
+    char commandPath[1024];
     char *revisedTokenizedCommand[1024];
 
     if (stat(tokenizedCommand, &statbuf) == 0)
@@ -70,7 +70,7 @@ void executeGenericCommand(char *tokenizedCommand[], char *env[])
      * verify if valid and execute
      */
 
-    commandPath = constructCommandPath(tokenizedCommand[0]);
+    constructCommandPath(commandPath, tokenizedCommand[0]);
     if (commandPath == NULL)
     {
         return;
