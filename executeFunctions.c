@@ -19,7 +19,8 @@ int executeCommand(char *tokenizedCommand[], char *env[])
 	if (shouldExit(filePath))
 	{
 		_write(msg);
-		return (1);
+		freeTokenizedCommand(tokenizedCommand);
+		exit(EXIT_SUCCESS);
 	}
 
 	if (strlen(tokenizedCommand[0]) == 1 && filePath == NULL)
