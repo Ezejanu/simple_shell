@@ -20,9 +20,13 @@ int executeCommand(char *tokenizedCommand[], char *env[]);
 
 /* Built ins */
 int shouldExit(char *command);
-void isEnvCommand(char *command);
 void _printEnv();
+void isEnvCommand(char *command);
 
-/* Helper Functions*/
-void _write(char *str);
+/* Execute Functions */
+void executeGenericCommand(char *tokenizedCommand[], char *env[]);
+void duplicateArray(char *duplicateArray[], char *originalArray[])
+
+    /* Helper Functions*/
+    void _write(char *str);
 #endif

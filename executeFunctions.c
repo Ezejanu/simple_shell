@@ -37,3 +37,75 @@ int executeCommand(char *tokenizedCommand[], char *env[])
 
     return (0);
 }
+
+/**
+ * executeGenericCommand - A function to execute generic commands
+ * i.e commands that do not need special conditions to execute
+ *
+ * @tokenizedCommand: a pointer to the tokenized command to be executed
+ * @env: passing the environment
+ *
+ * Return: void
+ */
+
+void executeGenericCommand(char *tokenizedCommand[], char *env[])
+{
+    /** user enters a full path
+     * use statbuf to verify if it is a valid path and execute
+     * what if valid but not executable? fork would raise an error that we can look at?
+     */
+
+    struct stat statbuf;
+    char *commandPath;
+    char *revisedTokenizedCommand[1024];
+
+    if (stat(tokenizedCommand, &statbuf) == 0)
+    {
+        _fork(tokenizedCommand, env);
+        return;
+    }
+
+    /** user enters the command name
+     * we need to construct the path ourselves
+     * verify if valid and execute
+     */
+
+    commandPath = constructCommandPath(tokenizedCommand[0]);
+    if (commandPath == NULL)
+    {
+        return;
+    }
+    /**
+     * Alternative for handling local variable issues
+     * char *commandPath[1024];
+     * constructCommandPath(tokenizedCommand[0], &commandPath);
+     */
+
+    duplicateArray(revisedTokenizedCommand, tokenizedCommand);
+    revisedTokenizedCommand[0] = commandPath;
+    _fork(revisedTokenizedCommand, env);
+}
+
+/**
+ * duplicateArray - A function to duplicate a 2-dimensional array
+ * It is a helper function for the executeGenericCommand function
+ *
+ * @duplicateArray: the destination array
+ * @originalArray: the source array
+ *
+ * Return: void
+ */
+
+void duplicateArray(char *duplicateArray[], char *originalArray[])
+{
+    int i;
+
+    for (i = 0; originalArray[i]; i++)
+    {
+        duplicateArray[i] = originalArray[i];
+    }
+    duplicateArray[i] = NULL;
+
+    return;
+}
+/* changes were made to this function - resolving the local variable issue */
