@@ -39,7 +39,7 @@ int main(int ac, char **av, char *env[])
 		if (fgets(userInput, sizeof(userInput), stdin) == NULL)
 		{
 			interrupted = 1;
-			continue;
+			exit(EXIT_FAILURE);
 		}
 		userInput[strcspn(userInput, "\n")] = '\0';
 
@@ -51,7 +51,7 @@ int main(int ac, char **av, char *env[])
 
 	} while (!interrupted);
 
-	exit(EXIT_FAILURE);
+	exit(EXIT_SUCCESS);
 }
 
 /**
