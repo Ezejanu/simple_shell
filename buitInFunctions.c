@@ -35,7 +35,10 @@ int isEnvCommand(char *command)
     int commandLength = strlen(command);
     char lastThreeChar[3];
     struct stat statbuf;
-	
+
+
+	if (commandLength == 3)
+	{
     lastThreeChar[0] = command[commandLength - 3];
     lastThreeChar[1] = command[commandLength - 2];
     lastThreeChar[2] = command[commandLength - 1];
@@ -50,6 +53,7 @@ int isEnvCommand(char *command)
             return (1);
         }
     }
+	}
 
     return (0);
 }
