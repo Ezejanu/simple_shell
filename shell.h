@@ -18,6 +18,11 @@ extern char **environ;
 void parseUserInput(char *tokenizedCommand[], char *userInput);
 int executeCommand(char *tokenizedCommand[], char *env[]);
 
+/* Built ins */
+int shouldExit(char *command);
+void isEnvCommand(char *command);
+void _printEnv();
+
 /* Helper Functions*/
 void _write(char *str);
 #endif
