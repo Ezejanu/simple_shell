@@ -28,6 +28,7 @@ int main(int ac, char **av, char *env[])
 		}
 		userInput[strcspn(userInput, "\n")] = '\0';
 		parseUserInput(userInput, tokenizedCommand);
+		
 		interrupted = executeCommand(tokenizedCommand, env);
 		freeTokenizedCommand(tokenizedCommand);
 		return (0);
@@ -68,5 +69,36 @@ void freeTokenizedCommand(char *tokenizedCommand[])
 	{
 		free(tokenizedCommand[i]);
 		i++;
+	}
+}
+
+/**
+ * trimWhiteSpace - A fuction to remove trailing and leading white spaces
+ *
+ * @str: the string to be parsed
+ *
+ * Return: void.
+ */
+
+void trimWhiteSpace(char *str) 
+{
+	int len = strlen(str);
+	int i = len - 1, j = 0;
+
+
+	while (isspace(str[j])) 
+	{
+		j++;
+	}
+	if (j > 0) 
+	{
+		memmove(str, str + j, len - j + 1);
+		len -= j;
+	}
+
+	while (i >= 0 && isspace(str[i])) 
+	{
+		str[i] = '\0';
+		i--;
 	}
 }

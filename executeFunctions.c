@@ -15,6 +15,12 @@ int executeCommand(char *tokenizedCommand[], char *env[])
 {
 	char *msg = "exit\n\n[Disconnected...]\n";
 	char *filePath = tokenizedCommand[0];
+	char *command = tokenizedCommand[0];
+
+	if (command == NULL || command[0] == '\0')
+	{
+		return 0;
+	}
 
 	if (shouldExit(filePath))
 	{

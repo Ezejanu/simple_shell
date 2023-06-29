@@ -24,6 +24,9 @@ void parseUserInput(char *userInput, char *tokenizedCommand[])
 		token = strtok(NULL, " ");
 	}
 
+	if (i > 0)
+		trimWhiteSpace(tokenizedCommand[0]);
+
 	/* Add a NULL pointer at the end of the tokenized command*/
 	tokenizedCommand[i] = NULL;
 }

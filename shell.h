@@ -9,6 +9,7 @@
 #include <sys/stat.h>
 #include <string.h>
 #include <unistd.h>
+#include <ctype.h>
 
 extern char **environ;
 #define MAX_TOKENS 1024
@@ -34,5 +35,5 @@ void _fork(char *tokenizedCommand[], char *env[]);
 /* Helper Functions*/
 void _write(char *str);
 void freeTokenizedCommand(char **tokenizedCommand);
-
+void trimWhiteSpace(char *str);
 #endif
