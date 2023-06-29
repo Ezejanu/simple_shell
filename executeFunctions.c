@@ -28,6 +28,7 @@ int executeCommand(char *tokenizedCommand[], char *env[])
 		if (tokenizedCommand[1] != NULL)
 		{
 			int exitStatus = atoi(tokenizedCommand[1]);
+
 			freeTokenizedCommand(tokenizedCommand);
 			exit(exitStatus);
 		}
