@@ -17,8 +17,20 @@ void parseUserInput(char *userInput, char *tokenizedCommand[])
 	int i = 0;
 	char *token = strtok(userInput, " ");
 
+	/* Check for comments */
+	if (token != NULL && token[0] == '#') 
+	{
+		tokenizedCommand[0] = NULL; 
+		return;
+	}
+
 	while (token != NULL && i < MAX_TOKENS)
 	{
+		if (token[0] == '#') 
+		{
+			break; 
+		}
+
 		tokenizedCommand[i] = strdup(token);
 		i++;
 		token = strtok(NULL, " ");
