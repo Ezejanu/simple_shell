@@ -19,7 +19,7 @@ int executeCommand(char *tokenizedCommand[], char *env[])
 
 	if (command == NULL || command[0] == '\0')
 	{
-		return 0;
+		return (0);
 	}
 
 	if (shouldExit(filePath))
