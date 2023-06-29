@@ -28,12 +28,11 @@ int main(int ac, char **av, char *env[])
 		}
 		userInput[strcspn(userInput, "\n")] = '\0';
 		parseUserInput(userInput, tokenizedCommand);
-		
+
 		interrupted = executeCommand(tokenizedCommand, env);
 		freeTokenizedCommand(tokenizedCommand);
 		return (0);
 	}
-
 	do {
 		printf("shell $: ");
 
@@ -51,7 +50,6 @@ int main(int ac, char **av, char *env[])
 		freeTokenizedCommand(tokenizedCommand);
 
 	} while (!interrupted);
-
 	exit(EXIT_SUCCESS);
 }
 
@@ -80,23 +78,23 @@ void freeTokenizedCommand(char *tokenizedCommand[])
  * Return: void.
  */
 
-void trimWhiteSpace(char *str) 
+void trimWhiteSpace(char *str)
 {
 	int len = strlen(str);
 	int i = len - 1, j = 0;
 
 
-	while (isspace(str[j])) 
+	while (isspace(str[j]))
 	{
 		j++;
 	}
-	if (j > 0) 
+	if (j > 0)
 	{
 		memmove(str, str + j, len - j + 1);
 		len -= j;
 	}
 
-	while (i >= 0 && isspace(str[i])) 
+	while (i >= 0 && isspace(str[i]))
 	{
 		str[i] = '\0';
 		i--;
