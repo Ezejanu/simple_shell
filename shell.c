@@ -12,45 +12,50 @@
 
 int main(int ac, char **av, char *env[])
 {
-	char userInput[1024];
+	char *userInput = NULL;
 	char *tokenizedCommand[MAX_TOKENS];
-	int interrupted = 0;
+	int interrupted = 0, exitStatus = 0;
+	size_t n;
 
 	(void)ac;
 	(void)av;
 
-	if (!isatty(STDIN_FILENO))
+	/*if (!isatty(STDIN_FILENO))
 	{
-		if (fgets(userInput, sizeof(userInput), stdin) == NULL)
+		if (getline(&userInput, &n, stdin) == -1)
 		{
 			perror("Error reading input");
 			return (1);
 		}
 		userInput[strcspn(userInput, "\n")] = '\0';
 		parseUserInput(userInput, tokenizedCommand);
+		free(userInput);
 
-		interrupted = executeCommand(tokenizedCommand, env);
+		interrupted = executeCommand(userInput, tokenizedCommand, env);
 		freeTokenizedCommand(tokenizedCommand);
 		return (0);
-	}
+	}*/
 	do {
-		printf("shell $: ");
+		if (isatty(STDIN_FILENO))
+			printf("shell $: ");
 
-		if (fgets(userInput, sizeof(userInput), stdin) == NULL)
+		if (getline(&userInput, &n, stdin) == -1)
 		{
 			interrupted = 1;
-			exit(EXIT_FAILURE);
+			free(userInput);
+			exit(exitStatus);
 		}
-		userInput[strcspn(userInput, "\n")] = '\0';
+		/*userInput[strcspn(userInput, "\n")] = '\0';*/
 
 		if (userInput[0] == '\0')
 			continue;
 		parseUserInput(userInput, tokenizedCommand);
-		interrupted = executeCommand(tokenizedCommand, env);
+		exitStatus = executeCommand(userInput, tokenizedCommand, env);
 		freeTokenizedCommand(tokenizedCommand);
 
 	} while (!interrupted);
-	exit(EXIT_SUCCESS);
+	free(userInput);
+	exit(exitStatus);
 }
 
 /**

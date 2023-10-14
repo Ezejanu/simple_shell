@@ -11,11 +11,12 @@
  * and 0 when the main loop can continue.
  */
 
-int executeCommand(char *tokenizedCommand[], char *env[])
+int executeCommand(char *userInput, char *tokenizedCommand[], char *env[])
 {
-	char *msg = "exit\n\n[Disconnected...]\n";
 	char *filePath = tokenizedCommand[0];
 	char *command = tokenizedCommand[0];
+
+	(void) env;
 
 	if (command == NULL || command[0] == '\0')
 	{
@@ -24,16 +25,17 @@ int executeCommand(char *tokenizedCommand[], char *env[])
 
 	if (shouldExit(filePath))
 	{
-		_write(msg);
 		if (tokenizedCommand[1] != NULL)
 		{
 			int exitStatus = atoi(tokenizedCommand[1]);
 
+			free(userInput);
 			freeTokenizedCommand(tokenizedCommand);
 			exit(exitStatus);
 		}
 		else
 		{
+			free(userInput);
 			freeTokenizedCommand(tokenizedCommand);
 			exit(EXIT_SUCCESS);
 		}
@@ -50,9 +52,7 @@ int executeCommand(char *tokenizedCommand[], char *env[])
 		return (0);
 	}
 
-	executeGenericCommand(tokenizedCommand, env);
-
-	return (0);
+	return (executeGenericCommand(tokenizedCommand));
 }
 
 /**
@@ -65,7 +65,7 @@ int executeCommand(char *tokenizedCommand[], char *env[])
  * Return: void
  */
 
-void executeGenericCommand(char *tokenizedCommand[], char *env[])
+int executeGenericCommand(char *tokenizedCommand[])
 {
 	/**
 	 * user enters a full path
@@ -77,11 +77,12 @@ void executeGenericCommand(char *tokenizedCommand[], char *env[])
 	struct stat statbuf;
 	char commandPath[1024];
 	char *revisedTokenizedCommand[1024];
+	int exitStatus = 0;
 
 	if (stat(tokenizedCommand[0], &statbuf) == 0)
 	{
-		_fork(tokenizedCommand, env);
-		return;
+		exitStatus = _fork(tokenizedCommand);
+		return (exitStatus);
 	}
 
 	/**
@@ -90,10 +91,10 @@ void executeGenericCommand(char *tokenizedCommand[], char *env[])
 	* verify if valid and execute
 	*/
 
-	constructCommandPath(commandPath, tokenizedCommand[0]);
+	exitStatus = constructCommandPath(commandPath, tokenizedCommand[0]);
 	if (commandPath == NULL)
 	{
-		return;
+		return (exitStatus);
 	}
 
 	/**
@@ -104,7 +105,11 @@ void executeGenericCommand(char *tokenizedCommand[], char *env[])
 
 	duplicateArray(revisedTokenizedCommand, tokenizedCommand);
 	revisedTokenizedCommand[0] = commandPath;
-	_fork(revisedTokenizedCommand, env);
+	exitStatus = _fork(revisedTokenizedCommand);
+
+	if (exitStatus == 127)
+		fprintf(stderr, "./hsh: 1: %s: not found\n", tokenizedCommand[0]);
+	return (exitStatus);
 }
 
 /**
@@ -137,7 +142,7 @@ void duplicateArray(char *duplicateArray[], char *originalArray[])
  * Return: void
  */
 
-void _fork(char *tokenizedCommand[], char *env[])
+int _fork(char *tokenizedCommand[])
 {
 	pid_t childproc;
 	int status;
@@ -151,9 +156,11 @@ void _fork(char *tokenizedCommand[], char *env[])
 	else if (childproc == 0)
 	{
 		if
-		(execve(tokenizedCommand[0], tokenizedCommand, env) == -1)
-		perror("Unable to execute command");
+		(execve(tokenizedCommand[0], tokenizedCommand, environ) == -1)
+			return (127);
 	}
 	else
-	wait(&status);
+		wait(&status);
+
+	return (0);
 }

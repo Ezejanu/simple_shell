@@ -19,7 +19,7 @@ extern char **environ;
 
 /* Parse Function */
 void parseUserInput(char *userInput, char *tokenizedCommand[]);
-int executeCommand(char *tokenizedCommand[], char *env[]);
+int executeCommand(char *userInput, char *tokenizedCommand[], char *env[]);
 
 /* Built ins */
 int shouldExit(char *command);
@@ -27,10 +27,10 @@ void _printEnv(void);
 int isEnvCommand(char *command);
 
 /* Execute Functions */
-void executeGenericCommand(char *tokenizedCommand[], char *env[]);
-void constructCommandPath(char *commandPath, char *command);
+int executeGenericCommand(char *tokenizedCommand[]);
+int constructCommandPath(char *commandPath, char *command);
 void duplicateArray(char *duplicateArray[], char *originalArray[]);
-void _fork(char *tokenizedCommand[], char *env[]);
+int _fork(char *tokenizedCommand[]);
 
 /* Helper Functions*/
 void _write(char *str);

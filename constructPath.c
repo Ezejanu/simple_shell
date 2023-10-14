@@ -10,7 +10,7 @@
  * Return: void
  */
 
-void constructCommandPath(char *commandPath, char *command)
+int constructCommandPath(char *commandPath, char *command)
 {
 	char *envPaths = NULL;
 	char *path = NULL;
@@ -38,8 +38,10 @@ void constructCommandPath(char *commandPath, char *command)
 	free(duplicate);
 	if (commandPath[0] != '\0')
 	{
-		return;
+		return (0);
 	}
 
-	perror("Did not find a valid path for command!");
+	return (127);
+
+	/* perror("Did not find a valid path for command!"); */
 }
